@@ -12,6 +12,13 @@ LAS/LAZ ──[ ptiler ]──> 3D Tiles v1.1 (tileset.json + GLB) ──[ 3DTil
 
 ![東京駅周辺の点群を表示したビューア](docs/screenshot.jpg)
 
+## デモ
+
+<https://shiwaku.github.io/pointcloud-3dtiles-v1-1-maplibre/>
+
+東京駅周辺の 8,169 万点（1.6 GB）を表示します。タイルセットは Pages の容量上限に収まらないため
+別の静的ホストに置き、`viewer/.env.production` の `VITE_TILESET_URL` で参照しています。
+
 ## 動作実績
 
 東京都の点群オープンデータ（`09LD18xx` メッシュ 20 ファイル）で確認しています。
@@ -113,7 +120,7 @@ http://localhost:8080/ を開くと、タイルセットの位置へ自動で移
 | 点サイズ | 点の直径（メートル）。全タイル共有マテリアルなので即座に反映される |
 | 描画品質 | `TilesRenderer.errorTarget`。小さいほど高精細・高負荷 |
 | 遠近で点を縮小 | `sizeAttenuation` の切り替え |
-| 背景地図 | 右下で「地図」（CARTO、テーマ連動）と「写真」（地理院シームレス写真）を切り替え |
+| 背景地図 | 右下で「地図」（地理院最適化ベクトルタイル・淡色地図風）と「写真」（地理院シームレス写真）を切り替え。ダークテーマでは淡色スタイルを実行時に明度反転する |
 | テーマ | ライト / ダーク。`prefers-color-scheme` を初期値にし、選択は保存される |
 | URL hash | 視点が `#ズーム/緯度/経度/方位/傾き` に反映される。hash 付きで開くとその視点を維持する |
 
@@ -121,7 +128,7 @@ http://localhost:8080/ を開くと、タイルセットの位置へ自動で移
 
 | 指定 | 既定値 | 説明 |
 | --- | --- | --- |
-| `?tileset=` / `VITE_TILESET_URL` | `/3dtiles/tokyo/tileset.json` | 表示するタイルセット |
+| `?tileset=` / `VITE_TILESET_URL` | `/3dtiles/tokyo/tileset.json` | 表示するタイルセット。本番ビルドの値は `viewer/.env.production` |
 | `VITE_DATA_ATTRIBUTION` | `点群データ` | 出典表記 |
 | `?debug` | – | `window.__viewer` に `map` と点群レイヤーを露出する |
 
