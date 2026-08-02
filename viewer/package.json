@@ -1,0 +1,22 @@
+{
+  "name": "pointcloud-3dtiles-viewer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "point-tiler が出力した 3D Tiles v1.1 点群を MapLibre GL JS + 3DTilesRendererJS で表示するビューア",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "3d-tiles-renderer": "0.4.21",
+    "maplibre-gl": "^5.24.0",
+    "three": "0.183.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.183.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

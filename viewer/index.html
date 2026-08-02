@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>点群 3D Tiles v1.1 ビューア</title>
+  <meta name="description" content="point-tiler が出力した 3D Tiles v1.1 点群を MapLibre GL JS + 3DTilesRendererJS で表示するビューア" />
+  <meta name="theme-color" content="#2a78d6" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Ccircle cx='16' cy='8' r='2'/%3E%3Ccircle cx='23' cy='12' r='2'/%3E%3Ccircle cx='11' cy='19' r='2'/%3E%3Ccircle cx='19' cy='17' r='2'/%3E%3Ccircle cx='24' cy='22' r='2'/%3E%3Ccircle cx='8' cy='25' r='2'/%3E%3Ccircle cx='16' cy='25' r='2'/%3E%3C/g%3E%3C/svg%3E" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <section id="panel" class="panel" aria-label="コントロールパネル">
+    <header class="panel-head">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">🟦</span>
+        <h1>点群 3D Tiles v1.1</h1>
+      </div>
+      <div class="head-actions">
+        <button id="theme-btn" class="icon-btn" type="button" title="テーマ切替" aria-label="テーマ切替"></button>
+        <button id="collapse-btn" class="icon-btn" type="button" title="パネル開閉" aria-label="パネル開閉"></button>
+      </div>
+    </header>
+
+    <div id="panel-body" class="panel-body">
+      <div class="field">
+        <div class="field-head">
+          <span class="field-label">表示</span>
+          <button id="fit-btn" class="mini-btn" type="button">データへ移動</button>
+        </div>
+
+        <label class="slider">
+          <span class="slider-head">
+            <span class="slider-label">点サイズ</span>
+            <output id="point-size-out" class="slider-val">0.30 m</output>
+          </span>
+          <input type="range" id="point-size" min="0.05" max="2" step="0.05" value="0.3" />
+        </label>
+
+        <label class="slider">
+          <span class="slider-head">
+            <span class="slider-label">描画品質</span>
+            <output id="error-target-out" class="slider-val">6</output>
+          </span>
+          <input type="range" id="error-target" min="1" max="48" step="1" value="6" />
+          <span class="slider-note">小さいほど高精細・高負荷</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="size-attenuation" checked />
+          <span class="switch" aria-hidden="true"></span>
+          <span class="t-label">遠近で点を縮小</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <span class="field-label">統計</span>
+        <dl class="stats">
+          <dt>表示タイル</dt><dd id="stat-visible">–</dd>
+          <dt>読込中</dt><dd id="stat-downloading">–</dd>
+          <dt>解析中</dt><dd id="stat-parsing">–</dd>
+          <dt>描画点数</dt><dd id="stat-points">–</dd>
+        </dl>
+      </div>
+
+      <div class="field">
+        <span class="field-label">タイルセット</span>
+        <p id="tileset-url" class="mono"></p>
+      </div>
+    </div>
+
+    <footer class="panel-foot">
+      変換: <a href="https://github.com/MIERUNE/point-tiler" target="_blank" rel="noopener">MIERUNE/point-tiler</a><br />
+      描画: <a href="https://github.com/NASA-AMMOS/3DTilesRendererJS" target="_blank" rel="noopener">3DTilesRendererJS</a> + MapLibre GL JS<br />
+      <span id="hint" class="hint">ドラッグ=移動 / 右ドラッグ=回転・傾き</span>
+    </footer>
+  </section>
+
+  <div id="toast" class="toast" role="alert" hidden></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

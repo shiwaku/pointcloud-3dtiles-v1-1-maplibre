@@ -1,0 +1,31 @@
+# ---- 入力データ（大容量・再配布不可のため追跡しない）----
+/las/
+
+# ---- 変換成果物 ----
+/3dtiles/
+
+# ---- ログ・一時ファイル ----
+/logs/
+*.log
+tmp/
+
+# ---- ツールバイナリ ----
+/bin/
+
+# ---- Node ----
+node_modules/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+
+# ---- ツール設定（各自のローカル設定）----
+.claude/settings.local.json
+
+# ---- OS / エディタ ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
